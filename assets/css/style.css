@@ -1,124 +1,115 @@
-/* Reset básico */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
+/* Establece un color más suave de fondo para el body */
 body {
-    background-color: #f5f8fa; /* Fondo estilo Twitter */
+    background-color: #e9eff5; /* Fondo más suave */
     color: #333;
+    font-family: 'Roboto', sans-serif; /* Cambio de fuente para mayor legibilidad */
     line-height: 1.6;
-    padding: 20px;
+    padding: 30px 50px;
 }
 
-/* Contenedor principal */
+/* Mejora de los encabezados */
 h1, h2, h3 {
-    margin-bottom: 15px;
-    color: #1DA1F2; /* Azul principal */
-}
-
-form {
-    background: #ffffff;
-    padding: 15px;
+    color: #2d3e50; /* Color más oscuro para mayor contraste */
     margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-weight: 700;
 }
 
-input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-input[type="text"]:focus, textarea:focus {
-    border-color: #1DA1F2;
-    outline: none;
-}
-
+/* Botones con animación y mejor diseño */
 button {
-    background-color: #1DA1F2;
-    color: #fff;
-    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 25px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: 0.3s;
-    font-weight: bold;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: #0d8ddb;
+    background-color: #2980b9;
+    transform: scale(1.05); /* Efecto al pasar el ratón */
 }
 
-/* Tarjetas de preguntas */
-.question, .answer {
-    background: #ffffff;
-    padding: 15px;
+/* Formulario con más espacio y bordes redondeados */
+form {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Mejora los campos de entrada */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
     margin-bottom: 15px;
     border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: 0.3s;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Tarjetas de preguntas con sombra suave y transición */
+.question, .answer {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 .question:hover, .answer:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* Sombra más pronunciada */
 }
 
-/* Enlaces */
+/* Enlaces con un toque más moderno */
 a {
-    color: #1DA1F2;
+    color: #3498db;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 a:hover {
+    color: #2980b9;
     text-decoration: underline;
 }
 
-/* Área de respuestas */
-#answersList {
-    margin-top: 20px;
-}
-
-/* Respuesta individual */
-.answer {
-    position: relative;
-}
-
-/* Botones de votación */
+/* Botones de votación más visibles */
 .vote-btn {
-    background: #E1E8ED;
+    background: #e1e8ed;
     color: #555;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 8px 15px;
+    border-radius: 6px;
     cursor: pointer;
-    margin-right: 5px;
-    transition: 0.3s;
+    margin-right: 10px;
+    transition: all 0.3s ease;
 }
 
 .vote-btn:hover {
-    background: #1DA1F2;
+    background: #3498db;
     color: white;
 }
 
-/* Formulario agregar respuesta */
-#answerForm {
-    margin-top: 20px;
-}
-
-/* Responsive */
+/* Ajustes responsive para dispositivos pequeños */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 20px;
     }
+
+    h1, h2, h3 {
+        font-size: 1.5em; /* Tamaño de fuente más pequeño */
+    }
+
     form, .question, .answer {
-        padding: 10px;
+        padding: 15px;
     }
 }
