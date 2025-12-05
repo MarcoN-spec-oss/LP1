@@ -1,16 +1,26 @@
 <?php
+session_start();
+include "includes/db.php";
 
-require_once __DIR__ . '/../functions/auth.php';
-require_once __DIR__ . '/../functions/vote.php';
-header('Content-Type: application/json');
-if (!is_logged()) { echo json_encode(['ok'=>false,'msg'=>'No autorizado']); exit; }
-
-$input = json_decode(file_get_contents('php://input'), true);
-$answer_id = intval($input['answer_id'] ?? 0);
-$vote = isset($input['vote']) ? intval($input['vote']) : null;
-if ($answer_id <= 0 || ($vote !== 0 && $vote !== 1)) {
-    echo json_encode(['ok'=>false,'msg'=>'Datos inválidos']); exit;
+if (!isset($_SESSION['user_id'])) {
+    die("Debes iniciar sesión para votar.");
 }
-$user = current_user();
-$res = cast_vote($answer_id, $user['id'], $vote);
-echo json_encode($res);
+
+$user_id = $_SESSION['user_id'];
+$answer_id = $_POST['answer_id'];
+$vote = $_POST['vote'];
+
+$sql = "SELECT * FROM votes WHERE user_id=$user_id AND answer_id=$answer_id";
+$res = $conn->query($sql);
+
+if ($res->num_rows > 0) {
+    $sql2 = "UPDATE votes SET vote=$vote WHERE user_id=$user_id AND answer_id=$answer_id";
+    $conn->query($sql2);
+    echo "Voto actualizado.";
+} else {
+    $sql3 = "INSERT INTO votes (answer_id, user_id, vote)
+             VALUES ($answer_id, $user_id, $vote)";
+    $conn->query($sql3);
+    echo "Voto registrado.";
+}
+?>

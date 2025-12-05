@@ -1,42 +1,60 @@
 <?php
+session_start();
 include "includes/db.php";
 
-$idPregunta = $_GET['id'];
+if (!isset($_GET['id'])) {
+    die("Error: no se recibió el ID de la pregunta.");
+}
+
+$question_id = intval($_GET['id']);
 
 $sql = "
-SELECT a.*, u.username
+SELECT a.*, u.username,
+    (SELECT COALESCE(SUM(CASE WHEN vote = 1 THEN 1 WHEN vote = 0 THEN -1 END),0)
+     FROM votes WHERE answer_id = a.id) AS votos
 FROM answers a
 JOIN users u ON a.user_id = u.id
-WHERE question_id = $idPregunta
+WHERE a.question_id = $question_id
 ORDER BY a.created_at ASC
 ";
 
-$res = $conn->query($sql);
+$result = $conn->query($sql);
 
 echo "<h4>Respuestas:</h4>";
 
-while ($row = $res->fetch_assoc()):
+if ($result->num_rows == 0) {
+    echo "<p>No hay respuestas todavía.</p>";
+}
+
+while ($row = $result->fetch_assoc()):
 ?>
+<div style='border-left:2px solid #aaa; padding:10px; margin-bottom:10px;'>
 
-<div style='margin-left:20px; border-left:2px solid #aaa; padding-left:10px; margin-bottom:10px;'>
     <p><?= $row['answer'] ?></p>
-    <small>Por: <?= $row['username'] ?> | Fecha: <?= $row['created_at'] ?></small>
-</div>
 
+    <small>
+        Por <?= $row['username'] ?> | <?= $row['created_at'] ?>
+    </small><br><br>
+
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <button onclick="votar(<?= $row['id'] ?>, 1)">👍 Like</button>
+        <button onclick="votar(<?= $row['id'] ?>, 0)">👎 Dislike</button>
+        <b><?= $row['votos'] ?> votos</b>
+    <?php else: ?>
+        <p>Inicia sesión para votar.</p>
+    <?php endif; ?>
+
+</div>
 <?php endwhile; ?>
 
-<?php
-if (isset($_SESSION['user_id'])) {
-
-echo "
-<form method='POST' action='create_answer.php'>
-    <input type='hidden' name='question_id' value='$idPregunta'>
-    <textarea name='texto' placeholder='Responder...' required></textarea><br>
-    <button type='submit'>Enviar respuesta</button>
-</form>
-";
-
-} else {
-    echo "<p>Inicia sesión para responder.</p>";
+<script>
+function votar(idRespuesta, tipoVoto){
+    $.post("vote.php", {
+        answer_id: idRespuesta,
+        vote: tipoVoto
+    }, function(r){
+        alert(r);
+        $("#respuestas-<?= $question_id ?>").load("load_answer.php?id=<?= $question_id ?>");
+    });
 }
-?>
+</script>
