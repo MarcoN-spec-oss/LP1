@@ -1,41 +1,36 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
-include __DIR__ . '/includes/db.php';
+// index.php
 include __DIR__ . '/includes/header.php';
-
-// Obtener preguntas
-$stmt = $pdo->query("SELECT * FROM questions ORDER BY created_at DESC");
-$questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+require_once __DIR__ . '/functions/auth.php';
+$user = current_user();
 ?>
+<main style="padding:20px; display:flex; gap:20px;">
+  <section style="flex:1; max-width:700px;">
+    <?php if ($user): ?>
+      <div style="margin-bottom:20px; border:1px solid #ddd; padding:10px;">
+        <h3>Crear pregunta</h3>
+        <form id="createQuestionForm">
+          <input name="title" placeholder="Título" style="width:100%; padding:6px"><br><br>
+          <textarea name="description" placeholder="Descripción" style="width:100%; padding:6px" rows="4"></textarea><br><br>
+          <button type="submit">Publicar pregunta</button>
+        </form>
+      </div>
+    <?php else: ?>
+      <div style="margin-bottom:20px; padding:10px; border:1px solid #ddd;">
+        <p>Inicia sesión para poder publicar preguntas y respuestas.</p>
+        <a href="login.php">Login</a> o <a href="register.php">Registrar</a>
+      </div>
+    <?php endif; ?>
 
-<h1>Mi Foro de Preguntas</h1>
+    <div id="questionsContainer"></div>
+  </section>
 
-<!-- Formulario para agregar pregunta -->
-<h2>Agregar Pregunta</h2>
-<form id="questionForm">
-    <input type="text" name="title" placeholder="Título" required><br>
-    <textarea name="description" placeholder="Descripción" required></textarea><br>
-    <button type="submit">Agregar Pregunta</button>
-</form>
+  <aside style="width:300px;">
+    <div style="border:1px solid #ddd; padding:10px;">
+      <h4>Sugerencias</h4>
+      <p>Este panel puede usarse para filtros, categorías, o actividades recientes.</p>
+    </div>
+  </aside>
+</main>
 
-<hr>
-
-<h2>Preguntas Recientes</h2>
-<div id="questionsList">
-    <?php foreach($questions as $q): ?>
-        <div class="question">
-            <a href="question.php?id=<?= $q['id'] ?>"><?= htmlspecialchars($q['title']) ?></a>
-            <p><?= nl2br(htmlspecialchars($q['description'])) ?></p>
-            <small>Fecha: <?= $q['created_at'] ?></small>
-        </div>
-    <?php endforeach; ?>
-</div>
-
-<script src="assets/js/main.js"></script>
 <?php include __DIR__ . '/includes/footer.php'; ?>

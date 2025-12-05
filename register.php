@@ -1,33 +1,38 @@
-<?php session_start(); ?>
-<?php include 'includes/header.php'; ?>
+<?php
+// register.php
+require_once __DIR__ . '/functions/auth.php';
+if (is_logged()) header('Location: index.php');
 
-<div class="login-container">
-    <form action="register_process.php" method="POST" class="login-form">
-        <h2>Registro de Usuario</h2>
-
-        <?php if(isset($_GET['error'])): ?>
-            <p class="error-msg"><?= $_GET['error']; ?></p>
-        <?php endif; ?>
-
-        <?php if(isset($_GET['success'])): ?>
-            <p class="success-msg"><?= $_GET['success']; ?></p>
-        <?php endif; ?>
-
-        <label>Nombre de usuario:</label>
-        <input type="text" name="username" required>
-
-        <label>Email:</label>
-        <input type="email" name="email" required>
-
-        <label>Contraseña:</label>
-        <input type="password" name="password" required>
-
-        <button type="submit">Registrarse</button>
-
-        <p class="login-note">
-            ¿Ya tienes una cuenta? <a href="login.php">Inicia sesión aquí.</a>
-        </p>
-    </form>
-</div>
-
-<?php include 'includes/footer.php'; ?>
+$msg = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    if ($username === '' || $email === '' || $password === '') {
+        $msg = "Completa todos los campos.";
+    } else {
+        $res = register_user($username, $email, $password);
+        if ($res['ok']) {
+            // loguear
+            $_SESSION['user_id'] = $res['id'];
+            $_SESSION['username'] = $username;
+            header('Location: index.php');
+            exit;
+        } else {
+            $msg = $res['msg'];
+        }
+    }
+}
+include __DIR__ . '/includes/header.php';
+?>
+<main style="padding:20px;">
+  <h2>Registro</h2>
+  <?php if ($msg): ?><p style="color:red"><?=htmlspecialchars($msg)?></p><?php endif; ?>
+  <form method="post">
+    <label>Usuario<br><input name="username"></label><br><br>
+    <label>Email<br><input name="email" type="email"></label><br><br>
+    <label>Contraseña<br><input name="password" type="password"></label><br><br>
+    <button type="submit">Registrarme</button>
+  </form>
+</main>
+<?php include __DIR__ . '/includes/footer.php'; ?>
