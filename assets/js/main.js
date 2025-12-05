@@ -1,4 +1,4 @@
-document.getElementById('questionForm').addEventListener('submit', function(e){
+document.getElementById('questionForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     let formData = new FormData(this);
 
@@ -10,9 +10,28 @@ document.getElementById('questionForm').addEventListener('submit', function(e){
     .then(data => {
         if(data.success){
             alert('Pregunta agregada!');
-            location.reload(); // Recarga lista de preguntas
+            location.reload();
         } else {
             alert('Error al agregar pregunta.');
+        }
+    });
+});
+
+document.getElementById("answerForm")?.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("add_answer.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        } else {
+            alert("Error al enviar respuesta");
         }
     });
 });
