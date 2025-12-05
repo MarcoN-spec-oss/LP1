@@ -2,7 +2,6 @@
 session_start();
 include "includes/db.php";
 
-// Si no enviaron el formulario, mostrar el login
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 ?>
 <!DOCTYPE html>

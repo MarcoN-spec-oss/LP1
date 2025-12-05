@@ -86,7 +86,7 @@ async function loadQuestions() {
   document.querySelectorAll('.q-title').forEach(t => {
     t.addEventListener('click', () => {
       const id = t.getAttribute('data-id');
-      window.open('/question.php?id=' + id, '_blank'); // file not provided yet; can implement later
+      window.open('/question.php?id=' + id, '_blank');
     });
   });
 }
