@@ -11,4 +11,4 @@ if(isset($_POST['title'], $_POST['description'], $_POST['user_id'])){
     echo $result ? "INSERT OK" : "INSERT FAIL";
     exit;
 }
-exit;
+exit; 
