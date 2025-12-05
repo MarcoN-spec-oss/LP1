@@ -2,14 +2,14 @@
 include __DIR__ . '/includes/db.php';
 include __DIR__ . '/includes/header.php';
 
-// Obtener preguntas
+
 $stmt = $pdo->query("SELECT * FROM questions ORDER BY created_at DESC");
 $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <h1>Mi Foro de Preguntas</h1>
 
-<!-- Formulario para agregar pregunta -->
+
 <h2>Agregar Pregunta</h2>
 <form id="questionForm">
     <input type="text" name="title" placeholder="Título" required><br>
