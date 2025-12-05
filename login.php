@@ -9,22 +9,26 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
-<h2>Iniciar Sesión</h2>
+<div class="login-container">
 
-<form action="login.php" method="POST">
-    <input type="email" name="email" placeholder="Correo" required><br><br>
-    <input type="password" name="password" placeholder="Contraseña" required><br><br>
-    <button type="submit">Entrar</button>
-</form>
+    <h2>Iniciar Sesión</h2>
 
-<p><a href="register.php">Crear una cuenta</a></p>
+    <form action="login.php" method="POST" class="form-auth">
+        <input type="email" name="email" placeholder="Correo" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <p class="auth-link"><a href="register.php">Crear una cuenta</a></p>
+
+</div>
 
 </body>
 </html>
-
 <?php
 exit();
 }

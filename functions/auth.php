@@ -1,7 +1,10 @@
 <?php
 
 require_once __DIR__ . '/../includes/db_connect.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 function register_user($username, $email, $password) {
     global $pdo;

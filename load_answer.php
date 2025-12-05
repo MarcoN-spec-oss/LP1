@@ -28,18 +28,18 @@ if ($result->num_rows == 0) {
 
 while ($row = $result->fetch_assoc()):
 ?>
-<div style='border-left:2px solid #aaa; padding:10px; margin-bottom:10px;'>
+<div class="answer-box">
 
     <p><?= $row['answer'] ?></p>
 
-    <small>
+    <small class="answer-meta">
         Por <?= $row['username'] ?> | <?= $row['created_at'] ?>
     </small><br><br>
 
     <?php if (isset($_SESSION['user_id'])): ?>
-        <button onclick="votar(<?= $row['id'] ?>, 1)">👍 Like</button>
-        <button onclick="votar(<?= $row['id'] ?>, 0)">👎 Dislike</button>
-        <b><?= $row['votos'] ?> votos</b>
+        <button class="btn-like" onclick="votar(<?= $row['id'] ?>, 1)">👍 Like</button>
+        <button class="btn-dislike" onclick="votar(<?= $row['id'] ?>, 0)">👎 Dislike</button>
+        <b class="vote-count"><?= $row['votos'] ?> votos</b>
     <?php else: ?>
         <p>Inicia sesión para votar.</p>
     <?php endif; ?>

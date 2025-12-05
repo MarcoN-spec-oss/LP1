@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+a {
+    text-decoration: none;
+    color: #0077cc;
+}
+
+h2, h3 {
+    margin: 0 0 15px;
+}
+
+.main-header {
+    background: #fff;
+    padding: 15px 30px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-nav a {
+    margin-left: 10px;
+}
+
+.user-menu-container {
+    position: relative;
+}
+
+.user-btn {
+    background: #0077cc;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.user-menu.visible {
+    display: block;
+}
+
+.page-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.center-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.pregunta-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+button {
+    padding: 10px 14px;
+    background: #0077cc;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background: #005fa3;
+}
+
+.form-respuesta {
+    display: none;
+    margin-top: 10px;
+}
+
+.contenedor-respuestas {
+    margin-top: 20px;
+}
+
+.login-container,
+.register-container {
+    width: 90%;
+    max-width: 450px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.form-auth input {
+    margin-bottom: 15px;
+}
+
+.auth-link {
+    margin-top: 15px;
+}
+
+.error-msg {
+    color: red;
+    margin-bottom: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
