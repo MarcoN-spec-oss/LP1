@@ -3,7 +3,7 @@
 $host = "localhost";
 $db = "foro";       // Nombre de la base de datos que creaste
 $user = "root";     // Usuario por defecto Laragon
-$pass = "themago30";         // Contraseña por defecto Laragon (vacía)
+$pass = "";         // Contraseña por defecto Laragon (vacía)
 
 try {
     // Crear instancia PDO
