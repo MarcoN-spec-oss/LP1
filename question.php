@@ -4,12 +4,12 @@ include __DIR__ . '/includes/header.php';
 
 $id = $_GET['id'] ?? 0;
 
-// Obtener pregunta
+
 $stmt = $pdo->prepare("SELECT * FROM questions WHERE id=?");
 $stmt->execute([$id]);
 $question = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Obtener respuestas
+
 $stmt2 = $pdo->prepare("SELECT * FROM answers WHERE question_id=? ORDER BY created_at ASC");
 $stmt2->execute([$id]);
 $answers = $stmt2->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ $answers = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     <?php endforeach; ?>
 </div>
 
-<!-- Formulario para agregar respuesta -->
+
 <h3>Agregar Respuesta</h3>
 <form id="answerForm">
     <textarea name="content" placeholder="Escribe tu respuesta..." required></textarea><br>

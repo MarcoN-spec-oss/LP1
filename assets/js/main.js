@@ -10,7 +10,7 @@ document.getElementById('questionForm').addEventListener('submit', function(e){
     .then(data => {
         if(data.success){
             alert('Pregunta agregada!');
-            location.reload(); // Recarga lista de preguntas
+            location.reload(); 
         } else {
             alert('Error al agregar pregunta.');
         }
