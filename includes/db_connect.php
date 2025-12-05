@@ -1,9 +1,9 @@
 <?php
-// includes/db_connect.php
+
 $DB_HOST = '127.0.0.1';
 $DB_NAME = 'foro_preguntas';
 $DB_USER = 'root';
-$DB_PASS = ''; // XAMPP default
+$DB_PASS = ''; 
 
 try {
     $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4", $DB_USER, $DB_PASS, [

@@ -1,5 +1,5 @@
 <?php
-// ajax/vote.php
+
 require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../functions/vote.php';
 header('Content-Type: application/json');

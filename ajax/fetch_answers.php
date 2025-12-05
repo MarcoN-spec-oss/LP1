@@ -1,5 +1,5 @@
 <?php
-// ajax/fetch_answers.php
+
 require_once __DIR__ . '/../functions/post.php';
 header('Content-Type: application/json');
 $question_id = intval($_GET['question_id'] ?? 0);

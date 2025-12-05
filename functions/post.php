@@ -1,5 +1,5 @@
 <?php
-// functions/post.php
+
 require_once __DIR__ . '/../includes/db_connect.php';
 
 function create_question($user_id, $title, $description) {
@@ -16,7 +16,7 @@ function create_answer($question_id, $user_id, $answer) {
     return $pdo->lastInsertId();
 }
 
-// funciones para listar
+
 function list_questions($limit = 50) {
     global $pdo;
     $stmt = $pdo->query("

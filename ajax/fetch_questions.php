@@ -1,5 +1,5 @@
 <?php
-// ajax/fetch_questions.php
+
 require_once __DIR__ . '/../functions/post.php';
 header('Content-Type: application/json');
 

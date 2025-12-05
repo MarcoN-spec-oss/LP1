@@ -1,5 +1,5 @@
 <?php
-// includes/footer.php
+
 ?>
 <footer style="padding:10px;border-top:1px solid #ddd;margin-top:20px;text-align:center">
   ForoPreguntas &copy; <?=date('Y')?>

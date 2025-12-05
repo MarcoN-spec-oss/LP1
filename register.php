@@ -1,5 +1,5 @@
 <?php
-// register.php
+
 require_once __DIR__ . '/functions/auth.php';
 if (is_logged()) header('Location: index.php');
 
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $res = register_user($username, $email, $password);
         if ($res['ok']) {
-            // loguear
+            
             $_SESSION['user_id'] = $res['id'];
             $_SESSION['username'] = $username;
             header('Location: index.php');

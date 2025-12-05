@@ -1,4 +1,4 @@
-// assets/js/main.js
+
 async function fetchJSON(url, opts = {}) {
   const res = await fetch(url, Object.assign({
     headers: {'Content-Type':'application/json'},
@@ -7,7 +7,6 @@ async function fetchJSON(url, opts = {}) {
   return res.json();
 }
 
-/* ---------- Index page functions ---------- */
 async function postQuestion(title, description) {
   return fetchJSON('/ajax/post_question.php', { method: 'POST', body: JSON.stringify({title, description}) });
 }
@@ -28,7 +27,6 @@ async function fetchAnswers(question_id) {
   return fetchJSON('/ajax/fetch_answers.php?question_id=' + encodeURIComponent(question_id));
 }
 
-/* DOM helpers and wiring for index */
 document.addEventListener('DOMContentLoaded', () => {
   const createForm = document.getElementById('createQuestionForm');
   if (createForm) {
@@ -68,7 +66,6 @@ async function loadQuestions() {
     container.appendChild(el);
   });
 
-  // listeners
   document.querySelectorAll('.toggleAnswersBtn').forEach(b => {
     b.addEventListener('click', async () => {
       const id = b.getAttribute('data-id');
@@ -109,7 +106,6 @@ function renderAnswersHTML(question_id, answers) {
       </div>
     </div>`;
   });
-  // form to add answer
   html += `<div style="margin-top:10px">
     <textarea id="answerText-${question_id}" rows="2" style="width:100%" placeholder="Escribe tu respuesta..."></textarea>
     <button id="submitAnswer-${question_id}" data-id="${question_id}">Responder</button>
@@ -127,7 +123,7 @@ function wireAnswerFormAndVotes(question_id) {
       if (!text) return alert('Escribe una respuesta');
       const res = await postAnswer(qid, text);
       if (res.ok) {
-        loadQuestions(); // simple refresh to update counts
+        loadQuestions(); 
       } else {
         alert(res.msg || 'Error');
       }
@@ -139,10 +135,10 @@ function wireAnswerFormAndVotes(question_id) {
       const v = parseInt(btn.getAttribute('data-vote'), 10);
       const res = await vote(aid, v);
       if (res.ok) {
-        // actualizar score en UI (mejor refrescar sección)
+        
         const scoreEl = document.getElementById('score-' + aid);
         if (scoreEl) {
-          // recargar respuestas del question
+          
           const resA = await fetchAnswers(question_id);
           if (resA.ok) {
             const updated = resA.data.find(x => x.id == aid);

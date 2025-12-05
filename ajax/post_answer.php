@@ -1,5 +1,5 @@
 <?php
-// ajax/post_answer.php
+
 require_once __DIR__ . '/../functions/auth.php';
 require_once __DIR__ . '/../functions/post.php';
 header('Content-Type: application/json');
