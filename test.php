@@ -1,15 +1,12 @@
 <?php
-// Cargar conexión a la base de datos
 include "includes/db.php";
 
-// Probar conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
 echo "<h2>conexion lista</h2>";
 
-// CONSULTA DE PRUEBA – puedes cambiar 'users' por cualquier tabla
 $sql = "SELECT * FROM users LIMIT 10";
 $result = $conn->query($sql);
 
